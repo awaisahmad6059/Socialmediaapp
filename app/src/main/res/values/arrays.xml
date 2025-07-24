@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="select_image">
+        <item>Select Category</item>
+        <item>Gallery</item>
+        <item>Camera</item>
+        <item>Files</item>
+    </string-array>
+    <string-array name="select_location">
+        <item>Select Location</item>
+        <item>A-Block</item>
+        <item>B-lock</item>
+        <item>C-Block</item>
+        <item>D-Block</item>
+    </string-array>
+</resources>

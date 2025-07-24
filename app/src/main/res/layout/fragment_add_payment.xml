@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Services Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Services"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/serviceSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- IBAN Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IBAN / Number"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/ibanSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- Name Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <LinearLayout
+            android:id="@+id/nameSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "425176474561",
+    "project_id": "mkwk-b31e1",
+    "storage_bucket": "mkwk-b31e1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425176474561:android:5328d293689dddf2a00540",
+        "android_client_info": {
+          "package_name": "com.mk.mkwk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3bBFzMUXYXMmpCPVCnV7kDji13amDS58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

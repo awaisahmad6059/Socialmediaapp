@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MKWK">
+        <activity
+            android:name=".AdminContactSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdmincancelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPaymentmethodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminNotificationSentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCompleteorderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminNewOrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminNewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminAddServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserNewOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
