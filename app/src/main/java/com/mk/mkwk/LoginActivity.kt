@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 val userId = mAuth.currentUser?.uid ?: return@addOnSuccessListener
 
-                // Check in "admins" collection first
                 firestore.collection("admins").document(userId).get()
                     .addOnSuccessListener { adminDoc ->
                         if (adminDoc.exists()) {
