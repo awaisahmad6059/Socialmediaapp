@@ -6,14 +6,14 @@
     card_view:cardCornerRadius="16dp"
     card_view:cardElevation="8dp"
     android:layout_margin="8dp"
-    android:background="@color/white">
+    android:background="@drawable/backgradient">
 
     <LinearLayout
         android:orientation="vertical"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@drawable/backgradient">
 
         <!-- Service -->
         <EditText
@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:hint="Service"
             android:padding="8dp"
-            android:background="@drawable/rounded_corner_background"
+            android:textColor="@color/white"
+            android:background="@drawable/gradient"
             android:enabled="false" />
 
         <!-- IBAN -->
@@ -32,18 +33,18 @@
             android:layout_height="wrap_content"
             android:hint="IBAN"
             android:padding="8dp"
-            android:background="@drawable/rounded_corner_background"
+            android:textColor="@color/white"
+            android:background="@drawable/gradient"
             android:enabled="false"
             android:layout_marginTop="8dp" />
-
-        <!-- Name -->
         <EditText
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
+            android:textColor="@color/white"
             android:padding="8dp"
-            android:background="@drawable/rounded_corner_background"
+            android:background="@drawable/gradient"
             android:enabled="false"
             android:layout_marginTop="8dp" />
 
@@ -60,6 +61,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/edit"
+                android:background="@color/white"
                 android:contentDescription="Edit"
                 android:padding="8dp" />
 

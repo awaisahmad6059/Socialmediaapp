@@ -210,46 +210,31 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"/>
-
-
-
-        <LinearLayout
-            android:id="@+id/btn"
+        <TextView
+            android:id="@+id/statusLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/chargeTextView"
+            android:layout_below="@id/chargeTextView"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
+            android:text="Status"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
 
-            <Button
-                android:id="@+id/completeTask"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:text="Complete Task"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statusLabel"
+            android:background="@drawable/rounded_corner_background"
+            android:padding="10dp"
+            android:text="Status"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
 
-            <Button
-                android:id="@+id/cancelTask"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/ButtonWhite"
-                android:text="Cancel Task"
-                android:textColor="@color/black" />
-            <Button
-                android:id="@+id/deleteTask"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/gradient"
-                android:text="Delete\n Task"
-                android:textColor="@color/white" />
-        </LinearLayout>
+
+
 
 
     </RelativeLayout>

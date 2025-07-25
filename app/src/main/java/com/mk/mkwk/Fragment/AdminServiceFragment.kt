@@ -30,7 +30,18 @@ class AdminServiceFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.serviceRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        serviceAdapter = ServiceAdapter(serviceList)
+        serviceAdapter = ServiceAdapter(
+            serviceList,
+            onEditClick = { selectedService ->
+                val intent = Intent(requireContext(), AdminAddServiceActivity::class.java)
+                intent.putExtra("category", selectedService.category)
+                startActivity(intent)
+            },
+            onDeleteClick = { selectedService ->
+                deleteServiceFromFirestore(selectedService)
+            }
+        )
+
         recyclerView.adapter = serviceAdapter
 
         view.findViewById<FloatingActionButton>(R.id.addServiceButton).setOnClickListener {
@@ -41,6 +52,29 @@ class AdminServiceFragment : Fragment() {
 
         return view
     }
+    private fun deleteServiceFromFirestore(service: Service) {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("arrays")
+            .whereEqualTo("category", service.category)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    db.collection("arrays").document(document.id).delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(), "Deleted successfully", Toast.LENGTH_SHORT).show()
+                            fetchServicesFromFirestore() // Refresh list
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(requireContext(), "Failed to delete", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Error finding service", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 
     private fun fetchServicesFromFirestore() {
         val db = FirebaseFirestore.getInstance()

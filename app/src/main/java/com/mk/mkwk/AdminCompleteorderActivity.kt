@@ -1,6 +1,7 @@
 package com.mk.mkwk
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,9 +33,10 @@ class AdminCompleteorderActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         searchBar = findViewById(R.id.search_bar)
 
-        adapter = CompletedOrderAdapter(orderList) { orderId ->
-            showDeleteConfirmationDialog(orderId)
-        }
+        adapter = CompletedOrderAdapter(orderList,
+            onDeleteOrder = { orderId -> showDeleteConfirmationDialog(orderId) },
+            onItemClick = { order -> openOrderDetail(order) }
+        )
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -55,6 +57,21 @@ class AdminCompleteorderActivity : AppCompatActivity() {
         }
     }
 
+    private fun openOrderDetail(order: CompletedOrder) {
+        val intent = Intent(this, AdminCompleteOrderDetailActivity::class.java)
+        intent.putExtra("orderId", order.orderId)
+        intent.putExtra("userId", order.userId)
+        intent.putExtra("category", order.category)
+        intent.putExtra("description", order.description)
+        intent.putExtra("link", order.link)
+        intent.putExtra("serviceBy", order.serviceBy)
+        intent.putExtra("amount", order.amount)
+        intent.putExtra("charge", order.charge)
+        intent.putExtra("username", order.username)
+        startActivity(intent)
+    }
+
+
     private fun fetchCompletedOrders() {
         firestore.collection("completeOrders").get()
             .addOnSuccessListener { querySnapshot ->
@@ -67,6 +84,7 @@ class AdminCompleteorderActivity : AppCompatActivity() {
                         userId = doc.getString("userId") ?: "",
                         category = doc.getString("category") ?: "",
                         description = doc.getString("description") ?: "",
+                        link = doc.getString("link") ?: "",
                         serviceBy = doc.getString("service") ?: "",
                         amount = doc.get("amount")?.toString() ?: "0",
                         charge = doc.get("charge")?.toString() ?: "0"

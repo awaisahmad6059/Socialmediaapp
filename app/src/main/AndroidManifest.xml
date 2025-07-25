@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MKWK">
         <activity
+            android:name=".UserOrderHistoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminCompleteOrderDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminContactSettingActivity"
             android:exported="false" />
         <activity

@@ -15,10 +15,9 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="71dp"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        android:background="@color/blue"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        android:background="@drawable/gradientdashboard"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        app:menu="@menu/bottom_nav_menu"/>
 </LinearLayout>

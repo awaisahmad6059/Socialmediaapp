@@ -110,7 +110,7 @@ class UserDashboardActivity : AppCompatActivity() {
         val cleanNumber = phoneNumber.replace("+", "").replace(" ", "")
 
         // You can also add a default message here if you want
-        val message = "Hello😊😊"
+        val message = ""
         val uri = "https://wa.me/$cleanNumber?text=${Uri.encode(message)}"
 
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.AdminServiceFragment">
 
-    <!-- RecyclerView to display the list of services -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/serviceRecyclerView"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         android:padding="8dp"
         android:clipToPadding="false"/>
 
-    <!-- Floating Action Button to add a new service -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addServiceButton"
         android:layout_width="wrap_content"
@@ -23,7 +21,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="Add Service"
-        android:backgroundTint="@color/ButtonBlue"
+        android:background="@drawable/backgradient"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </FrameLayout>

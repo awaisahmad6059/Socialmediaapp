@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/background"
         android:padding="16dp">
 
         <!-- Services Section -->
@@ -64,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
+            android:background="@drawable/gradient"
             android:layout_marginTop="16dp" />
     </LinearLayout>
 </ScrollView>

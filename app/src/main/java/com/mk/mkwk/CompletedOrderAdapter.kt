@@ -1,6 +1,5 @@
 package com.mk.mkwk
 
-import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CompletedOrderAdapter(
     private var originalList: List<CompletedOrder>,
-    private val onDeleteOrder: (orderId: String) -> Unit
+    private val onDeleteOrder: (orderId: String) -> Unit,
+    private val onItemClick: (CompletedOrder) -> Unit
 ) : RecyclerView.Adapter<CompletedOrderAdapter.CompletedOrderViewHolder>() {
 
     private var filteredList: MutableList<CompletedOrder> = originalList.toMutableList()
@@ -43,6 +43,9 @@ class CompletedOrderAdapter(
         holder.usernameTextView.text = order.username
         holder.descTextView.text = order.description
         holder.serviceTextView.text = order.serviceBy
+        holder.itemView.setOnClickListener {
+            onItemClick(order)
+        }
     }
 
     override fun getItemCount(): Int = filteredList.size

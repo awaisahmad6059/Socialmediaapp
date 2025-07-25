@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -67,12 +68,25 @@ class UserDashboardFragment : Fragment() {
 
         val logoutBtn = view.findViewById<ImageView>(R.id.sign_out_icon)
         logoutBtn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(activity, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            activity?.finish()
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    // Perform logout
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    activity?.finish()
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss() // Just dismiss the dialog
+                }
+                .setCancelable(false)
+                .show()
         }
+
 
         if (userId != null) {
             loadUserProfile(userId!!)
@@ -198,13 +212,23 @@ class UserDashboardFragment : Fragment() {
     }
 
     private fun showNotificationDetail(notification: Notification) {
+        val dialogView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.dialog_notification_detail, null)
+
+        val titleTextView = dialogView.findViewById<TextView>(R.id.notificationTitleTextView)
+        val messageTextView = dialogView.findViewById<TextView>(R.id.notificationMessageTextView)
+
+        titleTextView.text = notification.title
+        messageTextView.text = notification.message
+        messageTextView.movementMethod = LinkMovementMethod.getInstance()
+
         AlertDialog.Builder(requireContext())
-            .setTitle(notification.title)
-            .setMessage(notification.message)
+            .setView(dialogView)
             .setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
             .create()
             .show()
     }
+
 
     private fun loadUserProfile(userId: String) {
         firestore.collection("users").document(userId)

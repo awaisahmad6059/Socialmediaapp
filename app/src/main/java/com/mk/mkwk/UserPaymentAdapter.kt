@@ -30,37 +30,44 @@ class UserPaymentAdapter(private val paymentDocuments: List<DocumentSnapshot>) :
         holder.title.text = "Payment Method"
 
         // Extract service names from all documents
-        val serviceNames = paymentDocuments.map { doc ->
+        val serviceNames = mutableListOf("Select payment method")
+        serviceNames.addAll(paymentDocuments.map { doc ->
             doc.getString("services") ?: "Unknown Service"
-        }
+        })
 
         // Create spinner adapter
         val adapter = ArrayAdapter(
             holder.itemView.context,
-            android.R.layout.simple_spinner_item,
+            R.layout.spinner_item_white,
             serviceNames
         )
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         holder.spinner.adapter = adapter
 
         holder.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                val selectedDoc = paymentDocuments[pos]
+                if (pos == 0) {
+                    // Default selected: do nothing
+                    holder.nameText.text = "-"
+                    holder.ibanText.text = "-"
+                    return
+                }
+
+                val selectedDoc = paymentDocuments[pos - 1] // Adjust index due to extra item
                 val name = selectedDoc.getString("name") ?: "-"
                 val iban = selectedDoc.getString("iban") ?: "-"
 
                 holder.nameText.text = name
                 holder.ibanText.text = iban
 
-                // Setup long press to copy
                 setupLongPressCopy(holder.itemView.context, holder.nameText, name, "Name")
                 setupLongPressCopy(holder.itemView.context, holder.ibanText, iban, "IBAN")
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // Select first item by default
+            // Select first item by default
         if (paymentDocuments.isNotEmpty()) {
             holder.spinner.setSelection(0)
         }

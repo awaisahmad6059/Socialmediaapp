@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/ButtonBlue"
+                    android:background="@drawable/gradient"
                     android:text="Submit"
                     android:textColor="@color/white" />
 

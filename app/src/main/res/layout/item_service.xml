@@ -7,10 +7,12 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@drawable/backgradient">
 
         <TextView
             android:id="@+id/serviceNameText"
@@ -19,11 +21,34 @@
             android:text="Service Name"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:textColor="@color/white" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="end">
 
+            <ImageView
+                android:id="@+id/editIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/edit"
+                android:background="@color/white"
+                android:padding="8dp"
+                android:contentDescription="Edit" />
+
+            <ImageView
+                android:id="@+id/deleteIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/cancel"
+                android:background="@color/white"
+                android:padding="8dp"
+                android:contentDescription="Delete" />
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

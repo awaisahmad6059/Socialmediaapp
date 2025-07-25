@@ -20,4 +20,6 @@
     <color name="light_blue_A700">#007aff</color>
     <color name="ButtonWhite">#E8EEF2</color>
     <color name="WelcomeScreen">#040519</color>
+    <color name="gradient_midpoint">#6671F8</color>
+    <color name="dashboardbackground">#F2F4FA</color>
 </resources>

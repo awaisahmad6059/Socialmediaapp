@@ -6,6 +6,7 @@ data class CompletedOrder(
     val category: String = "",
     val description: String = "",
     val serviceBy: String = "",
+    val link: String = "",
     val amount: String = "",
     val charge: String = "",
     var username: String = ""

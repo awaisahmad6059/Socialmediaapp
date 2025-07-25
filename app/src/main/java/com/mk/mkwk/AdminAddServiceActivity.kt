@@ -31,8 +31,38 @@ class AdminAddServiceActivity : AppCompatActivity() {
         addServiceIcon = findViewById(R.id.addServiceIcon)
         serviceContainer = findViewById(R.id.serviceContainer)
 
-        // Add the first service field by default
-        addServiceField()
+        val editCategory = intent.getStringExtra("category")
+        var documentId: String? = null
+
+        if (!editCategory.isNullOrEmpty()) {
+            // Editing an existing service
+            submitBtn.text = "Update"
+
+            db.collection("arrays")
+                .whereEqualTo("category", editCategory)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (doc in documents) {
+                        documentId = doc.id
+                        val data = doc.data
+
+                        categoryEditText.setText(data["category"] as? String ?: "")
+                        descEditText.setText(data["description"] as? String ?: "")
+                        chargeEditText.setText(data["charge"].toString())
+
+                        // Load dynamic service fields
+                        var serviceIndex = 1
+                        while (data.containsKey("service$serviceIndex")) {
+                            val serviceText = data["service$serviceIndex"] as? String ?: ""
+                            addServiceField(serviceText)
+                            serviceIndex++
+                        }
+                    }
+                }
+        } else {
+            // Add first empty service field if not editing
+            addServiceField()
+        }
 
         addServiceIcon.setOnClickListener {
             addServiceField()
@@ -61,7 +91,6 @@ class AdminAddServiceActivity : AppCompatActivity() {
             )
 
             var serviceCount = 1
-
             for (i in 0 until serviceContainer.childCount) {
                 val child = serviceContainer.getChildAt(i)
                 if (child is EditText) {
@@ -78,15 +107,29 @@ class AdminAddServiceActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            db.collection("arrays")
-                .add(serviceData)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Services saved successfully", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-                }
+            if (documentId != null) {
+                // UPDATE existing document
+                db.collection("arrays").document(documentId!!)
+                    .set(serviceData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Service updated successfully", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Update failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            } else {
+                // ADD new document
+                db.collection("arrays")
+                    .add(serviceData)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Services saved successfully", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
         }
 
         cancelBtn.setOnClickListener {
@@ -94,18 +137,23 @@ class AdminAddServiceActivity : AppCompatActivity() {
         }
     }
 
-    private fun addServiceField() {
+
+    private fun addServiceField(preFilledText: String = "") {
         val newServiceField = EditText(this)
         newServiceField.hint = "Enter Service"
+        newServiceField.setText(preFilledText)
         newServiceField.background = ContextCompat.getDrawable(this, R.drawable.rounded_corner_background)
         newServiceField.inputType = InputType.TYPE_CLASS_TEXT
         newServiceField.setPadding(30, 30, 30, 30)
+
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         params.setMargins(0, 12, 0, 0)
         newServiceField.layoutParams = params
+
         serviceContainer.addView(newServiceField)
     }
+
 }

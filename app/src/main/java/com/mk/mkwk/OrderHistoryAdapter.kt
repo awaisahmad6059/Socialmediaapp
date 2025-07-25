@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mk.mkwk.R
 
-class OrderHistoryAdapter(private val orderList: List<Order>) :
-    RecyclerView.Adapter<OrderHistoryAdapter.OrderViewHolder>() {
+class OrderHistoryAdapter(
+    private val orderList: List<Order>,
+    private val onItemClick: (Order) -> Unit
+) : RecyclerView.Adapter<OrderHistoryAdapter.OrderViewHolder>() {
 
     class OrderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val category: TextView = view.findViewById(R.id.category)
@@ -29,12 +31,17 @@ class OrderHistoryAdapter(private val orderList: List<Order>) :
         holder.description.text = order.description
         holder.status.text = order.status
 
-        // Set status color
+        // Status color
         when (order.status.lowercase()) {
             "cancelled" -> holder.status.setTextColor(Color.RED)
             "completed" -> holder.status.setTextColor(Color.parseColor("#4CAF50")) // Green
             "pending" -> holder.status.setTextColor(Color.parseColor("#FFC107")) // Yellow
             else -> holder.status.setTextColor(Color.DKGRAY)
+        }
+
+        // Item click listener
+        holder.itemView.setOnClickListener {
+            onItemClick(order)
         }
     }
 

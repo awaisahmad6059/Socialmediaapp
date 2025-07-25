@@ -6,11 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ServiceAdapter(private val serviceList: List<Service>) :
-    RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
+class ServiceAdapter(
+    private val serviceList: List<Service>,
+    private val onEditClick: (Service) -> Unit,
+    private val onDeleteClick: (Service) -> Unit
+) : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
 
     class ServiceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val serviceNameText: TextView = itemView.findViewById(R.id.serviceNameText)
+        val editIcon: View = itemView.findViewById(R.id.editIcon)
+        val deleteIcon: View = itemView.findViewById(R.id.deleteIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceViewHolder {
@@ -22,6 +27,14 @@ class ServiceAdapter(private val serviceList: List<Service>) :
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
         val service = serviceList[position]
         holder.serviceNameText.text = service.category
+
+        holder.editIcon.setOnClickListener {
+            onEditClick(service)
+        }
+
+        holder.deleteIcon.setOnClickListener {
+            onDeleteClick(service)
+        }
     }
 
     override fun getItemCount(): Int = serviceList.size
