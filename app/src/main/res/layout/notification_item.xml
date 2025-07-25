@@ -17,8 +17,7 @@
             android:id="@+id/image_maintenance"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/notification"
-            android:background="@drawable/rounded_corner_background"/>
+            android:src="@drawable/notification" />
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
