@@ -1,10 +1,14 @@
 package com.mk.mkwk
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -91,7 +95,7 @@ class UserDashboardActivity : AppCompatActivity() {
                 if (document.exists()) {
                     val number = document.getString("whatsappNumber")
                     if (!number.isNullOrEmpty()) {
-                        openWhatsApp(number)
+                        showWhatsAppDialog(number)
                     } else {
                         Toast.makeText(this, "WhatsApp number not set", Toast.LENGTH_SHORT).show()
                     }
@@ -103,6 +107,31 @@ class UserDashboardActivity : AppCompatActivity() {
                 Toast.makeText(this, "Failed to fetch WhatsApp number", Toast.LENGTH_SHORT).show()
             }
     }
+
+    private fun showWhatsAppDialog(number: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Contact via WhatsApp")
+        builder.setMessage("WhatsApp Number: $number")
+
+        builder.setPositiveButton("Chat") { _, _ ->
+            openWhatsApp(number)
+        }
+
+        builder.setNegativeButton("Copy") { dialog, _ ->
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("WhatsApp Number", number)
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "Number copied to clipboard", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        builder.setNeutralButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        builder.create().show()
+    }
+
 
 
     private fun openWhatsApp(phoneNumber: String) {

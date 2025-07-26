@@ -104,7 +104,7 @@ class UserDashboardFragment : Fragment() {
             .get()
             .addOnSuccessListener { document ->
                 val currentCoins = document.getLong("coins") ?: 0
-                if (currentCoins < 1) {
+                if (currentCoins < 0) {
                     Toast.makeText(
                         requireContext(),
                         "You need to add balance to place an order. Current balance: $currentCoins",
